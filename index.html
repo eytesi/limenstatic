@@ -547,25 +547,13 @@ nav {
 .portfolio-card::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 80%);
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.2) 75%, rgba(0,0,0,0.1) 100%);
   z-index: 2;
 }
 
-.pc-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 28px 28px;
-  z-index: 1;
-}
+.pc-grid { display: none; }
 
-.pc-icon {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -60%);
-  font-size: 48px; opacity: 0.12; z-index: 1;
-}
+.pc-icon { display: none; }
 
 .pc-info {
   position: relative; z-index: 4;
@@ -598,13 +586,13 @@ nav {
 }
 .pc-link:hover { background: rgba(255,255,255,0.2); }
 
-/* Card colors */
-.pc-lena    { background: linear-gradient(160deg, #241808, #3d2b14); }
-.pc-miga    { background: linear-gradient(160deg, #fceef2, #f5d8e0); }
-.pc-krux    { background: linear-gradient(160deg, #080808, #181818); }
-.pc-cumbre  { background: linear-gradient(160deg, #050a10, #081828); }
-.pc-alero   { background: linear-gradient(160deg, #060e04, #0e1c08); }
-.pc-litoral { background: linear-gradient(160deg, #060310, #100818); }
+/* Card screenshots */
+.pc-lena    { background-image: url('/portfolio/lalena.jpg'); background-size: cover; background-position: center top; }
+.pc-miga    { background-image: url('/portfolio/miga.jpg');   background-size: cover; background-position: center top; }
+.pc-krux    { background-image: url('/portfolio/krux.jpg');   background-size: cover; background-position: center top; }
+.pc-cumbre  { background-image: url('/portfolio/cumbre.jpg'); background-size: cover; background-position: center top; }
+.pc-alero   { background-image: url('/portfolio/alero.jpg');  background-size: cover; background-position: center top; }
+.pc-litoral { background-image: url('/portfolio/litoral.jpg');background-size: cover; background-position: center top; }
 
 .pc-lena::before    { background: #c07a2a; }
 .pc-miga::before    { background: #e8a0b0; }
@@ -1012,6 +1000,78 @@ footer {
   footer { flex-direction: row; align-items: center; justify-content: space-between; padding: 2.5rem 4rem; }
   .footer-credit { padding-top: 0; border-top: none; }
 }
+
+/* ── FAQ ── */
+.faq-section {
+  padding: 5rem 1.5rem;
+  background: var(--arena);
+}
+.faq-section .section-eyebrow { color: var(--rosa); }
+.faq-section .section-eyebrow::before { background: var(--rosa); }
+
+.faq-list {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--borde-l);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--borde-l);
+  overflow: hidden;
+}
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 4vw, 20px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--negro);
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--rosa); }
+
+.faq-icon {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  color: var(--rosa);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.faq-a {
+  font-size: 14px;
+  color: var(--humo);
+  line-height: 1.85;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .faq-section { padding: 7rem 4rem; }
+  .faq-q { font-size: 22px; }
+}
+
 </style>
 </head>
 <body>
@@ -1319,6 +1379,76 @@ footer {
   </div>
 </section>
 
+
+<!-- FAQ -->
+<section class="faq-section fade-in" id="faq">
+  <div class="section-eyebrow">Preguntas frecuentes</div>
+  <div class="section-title-light">Lo que<br>todos preguntan.</div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿Cuánto tarda realmente en 7 días?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        7 días hábiles desde que me mandás los contenidos — textos, logo, fotos si tenés. Si los contenidos llegan completos el lunes, el viernes de la semana siguiente el sitio está live. El único cuello de botella sos vos aprobando el diseño.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿Qué necesito tener listo de mi parte?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Básicamente tres cosas: los textos de tu negocio (qué hacés, cómo contactarte, horarios si aplica), un logo si tenés, y fotos si querés usarlas. Si no tenés logo o fotos, lo resolvemos con tipografía y diseño — no es bloqueante.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿Incluye dominio y hosting?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        El precio no incluye dominio ni hosting, pero te ayudo a configurarlo. Un dominio cuesta ~$15 USD/año en Namecheap, y el hosting en Vercel es gratis para sitios como estos. Te quedás con todo — el código es tuyo.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿Puedo pedir cambios después de entregado?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        El precio incluye una ronda de revisiones antes de la entrega final. Cambios posteriores (actualizar precios, agregar secciones, etc.) se coordinan aparte según el alcance — generalmente son cosas simples y rápidas.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿El sitio va a funcionar en el celular?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        Sí, 100%. Todos los sitios se diseñan mobile-first — primero para el celular, después para desktop. Más del 70% de las visitas a cualquier negocio local vienen del celular, así que es lo primero que cuido.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>¿Por qué tan barato? ¿Qué tiene de trampa?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        No hay trampa. Es precio de lanzamiento — estoy construyendo el portfolio y quiero que el primer grupo de clientes sea real. A cambio de un precio bajo, me ayudás con un testimonio si quedás contento. Cuando suba el precio, queda fijo para quien ya trabajó conmigo.
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section fade-in" id="contacto">
   <div class="cta-arch"></div>
@@ -1358,6 +1488,15 @@ footer {
 </footer>
 
 <script>
+
+// ── FAQ ──
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
 // ── CUSTOM CURSOR ──
 const cur = document.getElementById('cursor');
 if (cur && window.matchMedia('(hover:hover)').matches) {
