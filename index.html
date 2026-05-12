@@ -44,7 +44,6 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%,-50%);
-  mix-blend-mode: difference;
   transition: width 0.25s, height 0.25s, opacity 0.25s;
 }
 .cursor.hover { width: 36px; height: 36px; }
@@ -98,7 +97,37 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  mix-blend-mode: difference;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease,
+              box-shadow 0.4s ease, border-radius 0.4s ease,
+              top 0.4s ease, left 0.4s ease, right 0.4s ease,
+              padding 0.4s ease;
+}
+
+/* Frosted glass state on scroll */
+nav.scrolled {
+  background: rgba(10, 8, 6, 0.72);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(250,246,240,0.06);
+}
+
+/* Mobile: floating pill on scroll */
+@media (max-width: 767px) {
+  nav.scrolled {
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    border-radius: 16px;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid rgba(250,246,240,0.07);
+  }
+}
+
+/* Desktop: full-width frosted */
+@media (min-width: 768px) {
+  nav.scrolled {
+    border-bottom: 1px solid rgba(250,246,240,0.06);
+  }
 }
 
 .nav-logo {
@@ -1488,6 +1517,13 @@ footer {
 </footer>
 
 <script>
+
+
+// ── NAV SCROLL ──
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
 // ── FAQ ──
 function toggleFaq(btn) {
